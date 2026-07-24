@@ -1,8 +1,12 @@
 import './App.css';
-import { Button } from './components/ui/button';
+import Header from './components/layout/Header';
 
 function App() {
-  return <Button>Hello</Button>;
+  return (
+    <>
+      <Header />
+    </>
+  );
 }
 
 export default App;
