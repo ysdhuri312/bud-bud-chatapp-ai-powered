@@ -7,14 +7,6 @@ export default function Header() {
         <div className='flex justify-between py-3'>
           <p>LOGO.</p>
           <div className='flex gap-1'>
-            {/* <Show when='signed-out'>
-              <Button>
-                <SignInButton />
-              </Button>
-              <Button>
-                <SignUpButton />
-              </Button>
-            </Show> */}
             <Show when='signed-in'>
               <UserButton />
             </Show>
