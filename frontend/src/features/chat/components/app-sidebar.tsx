@@ -1,5 +1,14 @@
 import * as React from 'react';
-import { ArchiveX, Command, File, Inbox, Send, Trash2 } from 'lucide-react';
+import {
+  ArchiveX,
+  Command,
+  File,
+  Inbox,
+  Send,
+  Trash2,
+  MessageCirclePlus,
+  EllipsisVertical,
+} from 'lucide-react';
 
 import { NavUser } from './nav-user';
 import { Label } from '@/components/ui/label';
@@ -16,24 +25,24 @@ import {
   SidebarMenuItem,
   useSidebar,
 } from '@/components/ui/sidebar';
-import { Switch } from '@/components/ui/switch';
+import { Button } from '@/components/ui/button';
 
 // This is sample data
 const data = {
   user: {
     name: 'shadcn',
     email: 'm@example.com',
-    avatar: '/avatars/shadcn.jpg',
+    avatar: 'https://avatar.vercel.sh/vercel.svg?text=YD',
   },
   navMain: [
     {
-      title: 'Inbox',
+      title: 'Chats',
       url: '#',
       icon: Inbox,
       isActive: true,
     },
     {
-      title: 'Drafts',
+      title: 'Groups',
       url: '#',
       icon: File,
       isActive: false,
@@ -45,7 +54,7 @@ const data = {
       isActive: false,
     },
     {
-      title: 'Junk',
+      title: 'Archives',
       url: '#',
       icon: ArchiveX,
       isActive: false,
@@ -230,8 +239,12 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
               {activeItem?.title}
             </div>
             <Label className='flex items-center gap-2 text-sm'>
-              <span>Unreads</span>
-              <Switch className='shadow-none' />
+              <Button variant='ghost'>
+                <MessageCirclePlus />
+              </Button>
+              <Button variant='ghost'>
+                <EllipsisVertical />
+              </Button>
             </Label>
           </div>
           <SidebarInput placeholder='Type to search...' />
