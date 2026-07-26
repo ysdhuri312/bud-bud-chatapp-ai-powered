@@ -26,6 +26,7 @@ import {
   useSidebar,
 } from '@/components/ui/sidebar';
 import { Button } from '@/components/ui/button';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 
 // This is sample data
 const data = {
@@ -66,86 +67,92 @@ const data = {
       isActive: false,
     },
   ],
-  mails: [
+  chats: [
     {
       name: 'William Smith',
       email: 'williamsmith@example.com',
+      avatar: 'https://avatar.vercel.sh/vercel.svg?text=YD',
       subject: 'Meeting Tomorrow',
       date: '09:34 AM',
-      teaser:
-        'Hi team, just a reminder about our meeting tomorrow at 10 AM.\nPlease come prepared with your project updates.',
+      teaser: 'Hi team, just a reminder about our meeting tomorrow at 10 AM.',
     },
     {
       name: 'Alice Smith',
       email: 'alicesmith@example.com',
+      avatar: 'https://avatar.vercel.sh/vercel.svg?text=YD',
       subject: 'Re: Project Update',
       date: 'Yesterday',
-      teaser:
-        "Thanks for the update. The progress looks great so far.\nLet's schedule a call to discuss the next steps.",
+      teaser: 'Thanks for the update. The progress looks great so far.',
     },
     {
       name: 'Bob Johnson',
       email: 'bobjohnson@example.com',
+      avatar: 'https://avatar.vercel.sh/vercel.svg?text=YD',
       subject: 'Weekend Plans',
       date: '2 days ago',
       teaser:
-        "Hey everyone! I'm thinking of organizing a team outing this weekend.\nWould you be interested in a hiking trip or a beach day?",
+        "Hey everyone! I'm thinking of organizing a team outing this weekend.",
     },
     {
       name: 'Emily Davis',
       email: 'emilydavis@example.com',
+      avatar: 'https://avatar.vercel.sh/vercel.svg?text=YD',
       subject: 'Re: Question about Budget',
       date: '2 days ago',
-      teaser:
-        "I've reviewed the budget numbers you sent over.\nCan we set up a quick call to discuss some potential adjustments?",
+      teaser: "I've reviewed the budget numbers you sent over.",
     },
     {
       name: 'Michael Wilson',
       email: 'michaelwilson@example.com',
+      avatar: 'https://avatar.vercel.sh/vercel.svg?text=YD',
       subject: 'Important Announcement',
       date: '1 week ago',
-      teaser:
-        "Please join us for an all-hands meeting this Friday at 3 PM.\nWe have some exciting news to share about the company's future.",
+      teaser: 'Please join us for an all-hands meeting this Friday at 3 PM.',
     },
     {
       name: 'Sarah Brown',
       email: 'sarahbrown@example.com',
+      avatar: 'https://avatar.vercel.sh/vercel.svg?text=YD',
       subject: 'Re: Feedback on Proposal',
       date: '1 week ago',
       teaser:
-        "Thank you for sending over the proposal. I've reviewed it and have some thoughts.\nCould we schedule a meeting to discuss my feedback in detail?",
+        "Thank you for sending over the proposal. I've reviewed it and have some thoughts.",
     },
     {
       name: 'David Lee',
       email: 'davidlee@example.com',
+      avatar: 'https://avatar.vercel.sh/vercel.svg?text=YD',
       subject: 'New Project Idea',
       date: '1 week ago',
       teaser:
-        "I've been brainstorming and came up with an interesting project concept.\nDo you have time this week to discuss its potential impact and feasibility?",
+        "I've been brainstorming and came up with an interesting project concept.",
     },
     {
       name: 'Olivia Wilson',
       email: 'oliviawilson@example.com',
+      avatar: 'https://avatar.vercel.sh/vercel.svg?text=YD',
       subject: 'Vacation Plans',
       date: '1 week ago',
       teaser:
-        "Just a heads up that I'll be taking a two-week vacation next month.\nI'll make sure all my projects are up to date before I leave.",
+        "Just a heads up that I'll be taking a two-week vacation next month.",
     },
     {
       name: 'James Martin',
       email: 'jamesmartin@example.com',
+      avatar: 'https://avatar.vercel.sh/vercel.svg?text=YD',
       subject: 'Re: Conference Registration',
       date: '1 week ago',
       teaser:
-        "I've completed the registration for the upcoming tech conference.\nLet me know if you need any additional information from my end.",
+        "I've completed the registration for the upcoming tech conference.",
     },
     {
       name: 'Sophia White',
       email: 'sophiawhite@example.com',
+      avatar: 'https://avatar.vercel.sh/vercel.svg?text=YD',
       subject: 'Team Dinner',
       date: '1 week ago',
       teaser:
-        "To celebrate our recent project success, I'd like to organize a team dinner.\nAre you available next Friday evening? Please let me know your preferences.",
+        "To celebrate our recent project success, I'd like to organize a team dinner.",
     },
   ],
 };
@@ -154,7 +161,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   // Note: I'm using state to show active item.
   // IRL you should use the url/router.
   const [activeItem, setActiveItem] = React.useState(data.navMain[0]);
-  const [mails, setMails] = React.useState(data.mails);
+  const [chats, setChats] = React.useState(data.chats);
   const { setOpen } = useSidebar();
 
   return (
@@ -204,8 +211,8 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                       }}
                       onClick={() => {
                         setActiveItem(item);
-                        const mail = data.mails.sort(() => Math.random() - 0.5);
-                        setMails(
+                        const mail = data.chats.sort(() => Math.random() - 0.5);
+                        setChats(
                           mail.slice(
                             0,
                             Math.max(5, Math.floor(Math.random() * 10) + 1),
@@ -252,21 +259,26 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         <SidebarContent>
           <SidebarGroup className='px-0'>
             <SidebarGroupContent>
-              {mails.map((mail) => (
-                <a
-                  href='#'
-                  key={mail.email}
-                  className='flex flex-col items-start gap-2 border-b p-4 text-sm leading-tight whitespace-nowrap last:border-b-0 hover:bg-sidebar-accent hover:text-sidebar-accent-foreground'
-                >
-                  <div className='flex w-full items-center gap-2'>
-                    <span>{mail.name}</span>{' '}
-                    <span className='ml-auto text-xs'>{mail.date}</span>
-                  </div>
-                  <span className='font-medium'>{mail.subject}</span>
-                  <span className='line-clamp-2 w-65 text-xs whitespace-break-spaces'>
-                    {mail.teaser}
-                  </span>
-                </a>
+              {chats.map((chat) => (
+                <div className='flex items-center hover:bg-sidebar-accent hover:text-sidebar-accent-foreground'>
+                  <Avatar className='h-8 w-8 rounded-lg ml-2'>
+                    <AvatarImage src={chat.avatar} alt={chat.name} />
+                    <AvatarFallback className='rounded-lg'>YD</AvatarFallback>
+                  </Avatar>{' '}
+                  <a
+                    href='#'
+                    key={chat.email}
+                    className='flex flex-col items-start gap-1 border-b p-3 text-sm leading-tight whitespace-nowrap last:border-b-0'
+                  >
+                    <div className='flex w-full items-center gap-2'>
+                      <span>{chat.name}</span>{' '}
+                      <span className='ml-auto text-xs'>{chat.date}</span>
+                    </div>
+                    <span className='line-clamp-2 w-58 text-xs whitespace-break-spaces'>
+                      {chat.teaser}
+                    </span>
+                  </a>
+                </div>
               ))}
             </SidebarGroupContent>
           </SidebarGroup>
