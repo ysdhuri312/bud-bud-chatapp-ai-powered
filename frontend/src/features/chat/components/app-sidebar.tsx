@@ -261,7 +261,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
             <SidebarGroupContent>
               {chats.map((chat) => (
                 <div className='flex items-center hover:bg-sidebar-accent hover:text-sidebar-accent-foreground'>
-                  <Avatar className='h-8 w-8 rounded-lg ml-2'>
+                  <Avatar className='h-10 w-10 rounded-lg ml-2'>
                     <AvatarImage src={chat.avatar} alt={chat.name} />
                     <AvatarFallback className='rounded-lg'>YD</AvatarFallback>
                   </Avatar>{' '}
