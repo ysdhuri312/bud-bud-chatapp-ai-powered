@@ -233,7 +233,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
           </SidebarGroup>
         </SidebarContent>
         <SidebarFooter>
-          <NavUser user={data.user} />
+          <NavUser />
         </SidebarFooter>
       </Sidebar>
 
@@ -260,7 +260,10 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
           <SidebarGroup className='px-0'>
             <SidebarGroupContent>
               {chats.map((chat) => (
-                <div className='flex items-center hover:bg-sidebar-accent hover:text-sidebar-accent-foreground'>
+                <div
+                  key={chat.email}
+                  className='flex items-center hover:bg-sidebar-accent hover:text-sidebar-accent-foreground'
+                >
                   <Avatar className='h-10 w-10 rounded-lg ml-2'>
                     <AvatarImage src={chat.avatar} alt={chat.name} />
                     <AvatarFallback className='rounded-lg'>YD</AvatarFallback>
