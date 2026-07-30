@@ -53,8 +53,11 @@ import {
   MessageScrollerProvider,
   MessageScrollerViewport,
 } from '@/components/ui/message-scroller';
+import { useClerk } from '@clerk/react';
 
 export default function Page() {
+  const { signOut } = useClerk();
+
   return (
     <SidebarProvider
       style={
@@ -122,7 +125,10 @@ export default function Page() {
                         Delete chat
                       </DropdownMenuItem>
                       <DropdownMenuSeparator />
-                      <DropdownMenuItem variant='destructive'>
+                      <DropdownMenuItem
+                        variant='destructive'
+                        onClick={() => signOut({ redirectUrl: '/' })}
+                      >
                         <LogOutIcon />
                         Log out
                       </DropdownMenuItem>

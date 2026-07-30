@@ -2,19 +2,34 @@ import { createBrowserRouter } from 'react-router';
 import RootLayout from '@/layouts/RootLayout';
 import AuthLayout from '@/layouts/AuthLayout';
 import ChatLayout from '@/layouts/ChatLayout';
-import Auth from '@/features/auth/pages/AuthPage';
 import ChatPage from '@/features/chat/pages/ChatPage';
+import Signin from '@/features/auth/pages/Signin';
+import Signup from '@/features/auth/pages/Signup';
+import Home from '@/components/layout/Home';
+import { Show } from '@clerk/react';
 
 export const router = createBrowserRouter([
   {
     element: <RootLayout />,
     children: [
       {
+        element: (
+          <Show when='signed-out'>
+            <Home />
+          </Show>
+        ),
+        path: '/',
+      },
+      {
         element: <AuthLayout />,
         children: [
           {
-            element: <Auth />,
-            path: '/',
+            element: <Signin />,
+            path: '/sign-in',
+          },
+          {
+            element: <Signup />,
+            path: '/sign-up',
           },
         ],
       },
@@ -22,7 +37,11 @@ export const router = createBrowserRouter([
         element: <ChatLayout />,
         children: [
           {
-            element: <ChatPage />,
+            element: (
+              <Show when='signed-in'>
+                <ChatPage />
+              </Show>
+            ),
             path: '/chat',
           },
         ],

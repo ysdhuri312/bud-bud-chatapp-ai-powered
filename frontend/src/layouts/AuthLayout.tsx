@@ -6,10 +6,8 @@ export default function AuthLayout() {
   return (
     <>
       <Header />
-      <main>
-        <div>
-          <Outlet />
-        </div>
+      <main className='flex justify-center'>
+        <Outlet />
       </main>
       <Footer />
     </>
