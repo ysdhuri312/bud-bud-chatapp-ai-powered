@@ -1,8 +1,8 @@
 import express, { type Request, type Response } from 'express';
 import cors from 'cors';
 import { globalErrorHandler } from './handlers/GlobalErrorHandler.js';
-import { AppError } from './handlers/CustomErrorHandler.js';
 import cookieParser from 'cookie-parser';
+import userRoutes from './routes/user.route.js';
 
 export const app = express();
 
@@ -12,12 +12,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 app.use(cookieParser());
 
-export function sum(a: number, b: number) {
-  const sum = a + b;
-  return sum;
-}
-
-app.get('/', (_req: Request, res: Response) => {
+app.get('/api/v1', (_req: Request, res: Response) => {
   res.json({
     success: true,
     message: 'Welcome to API v1.0.0',
@@ -25,8 +20,6 @@ app.get('/', (_req: Request, res: Response) => {
   });
 });
 
-app.get('/error', () => {
-  throw new AppError(404, 'Not found');
-});
+app.use('/api/v1', userRoutes);
 
 app.use(globalErrorHandler);
