@@ -17,6 +17,8 @@ const envSchema = z.object({
     ])
     .default('development'),
   MONGODB_URI: z.url(),
+  CLERK_PUBLISHABLE_KEY: z.string(),
+  CLERK_SECRET_KEY: z.string(),
 });
 
 const env = envSchema.parse(process.env);

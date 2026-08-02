@@ -1,11 +1,11 @@
 info:
-  name: Untitled
+  name: home
   type: http
   seq: 1
 
 http:
   method: GET
-  url: ""
+  url: "{{baseUrl}}"
   auth: inherit
 
 settings:

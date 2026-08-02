@@ -1,6 +1,6 @@
 import type { Response, Request, NextFunction } from 'express';
-import { env } from '../configs/env.js';
 import type { AppError } from './CustomErrorHandler.js';
+import env from '../configs/env.js';
 
 export function globalErrorHandler(
   err: AppError,
