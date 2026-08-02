@@ -1,7 +1,10 @@
-import mongoose from 'mongoose';
+import mongoose, { Document, model } from 'mongoose';
+import type { IUser } from './user.schema.js';
+interface IUserDocument extends IUser, Document {}
 
-const userSchema = new mongoose.Schema(
+const userSchema = new mongoose.Schema<IUserDocument>(
   {
+    clerkId: String,
     firstName: String,
     lastName: String,
     email: {
@@ -20,5 +23,6 @@ const userSchema = new mongoose.Schema(
   { timestamps: true },
 );
 
-const UserModel = mongoose.model('User', userSchema);
+const UserModel =
+  mongoose.models.User || model<IUserDocument>('User', userSchema);
 export default UserModel;

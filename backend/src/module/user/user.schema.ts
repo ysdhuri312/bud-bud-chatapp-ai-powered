@@ -1,6 +1,7 @@
 import z from 'zod';
 
 export const userSchema = z.object({
+  clerkId: z.string(),
   firstName: z.string().min(3),
   lastName: z.string().min(3),
   email: z.email(),
@@ -9,4 +10,4 @@ export const userSchema = z.object({
   about: z.string(),
 });
 
-export type UserDto = z.infer<typeof userSchema>;
+export type IUser = z.infer<typeof userSchema>;
