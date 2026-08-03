@@ -17,8 +17,9 @@ export class BadRequestError extends AppError {
     super(400, message, 'BAD_REQUEST');
   }
 }
-// export class NotFoundError extends AppError {
-//   constructor(message = 'Resource not found') {
-//     super(404, message);
-//   }
-// }
+
+export class ClerkError extends AppError {
+  constructor(message: string, details: unknown) {
+    super(500, message, 'CLERK_ERROR', details);
+  }
+}
