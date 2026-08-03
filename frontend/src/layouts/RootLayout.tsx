@@ -17,8 +17,8 @@ export default function RootLayout() {
       routerReplace={(to) => navigate(to, { replace: true })}
       signInUrl='/sign-in'
       signUpUrl='/sign-up'
-      signInFallbackRedirectUrl='/chat'
-      signUpFallbackRedirectUrl='/'
+      signInFallbackRedirectUrl='/callback'
+      signUpFallbackRedirectUrl='/callback'
     >
       <div className=''>
         <Outlet />

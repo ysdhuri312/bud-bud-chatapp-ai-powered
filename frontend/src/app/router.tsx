@@ -7,6 +7,7 @@ import Signin from '@/features/auth/pages/Signin';
 import Signup from '@/features/auth/pages/Signup';
 import Home from '@/components/layout/Home';
 import { Show } from '@clerk/react';
+import AuthCallback from '@/features/auth/components/AuthCallback';
 
 export const router = createBrowserRouter([
   {
@@ -30,6 +31,10 @@ export const router = createBrowserRouter([
           {
             element: <Signup />,
             path: '/sign-up',
+          },
+          {
+            element: <AuthCallback />,
+            path: '/callback',
           },
         ],
       },
