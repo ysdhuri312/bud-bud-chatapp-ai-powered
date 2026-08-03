@@ -10,7 +10,7 @@ export const validate = (schema: ZodObject) => {
       return next();
     } catch (err) {
       if (err instanceof ZodError) {
-        return new AppError(400, err.issues[0]?.message as string);
+        throw new AppError(400, err.issues[0]?.message, 'ZOD_ERROR');
       } else {
         return next(err);
       }

@@ -7,7 +7,7 @@ export const userSchema = z.object({
   email: z.email(),
   avatar: z.string(),
   status: z.enum(['online', 'offline']).default('offline'),
-  about: z.string(),
+  about: z.string().optional(),
 });
 
 export type IUser = z.infer<typeof userSchema>;
