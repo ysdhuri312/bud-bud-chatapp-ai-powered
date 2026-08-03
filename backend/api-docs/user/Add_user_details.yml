@@ -1,5 +1,5 @@
 info:
-  name: Add user details
+  name: Add_user_details
   type: http
   seq: 3
 
@@ -10,6 +10,7 @@ http:
     type: json
     data: |-
       {
+        "clerkId":"dfsdfdsf44546",
         "firstName": "Yogesh",
         "lastName": "Dhuri",
         "email": "abc@google.com",

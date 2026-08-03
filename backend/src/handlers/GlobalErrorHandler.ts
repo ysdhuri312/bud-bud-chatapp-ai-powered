@@ -1,5 +1,5 @@
 import type { Response, Request, NextFunction } from 'express';
-import type { AppError } from './CustomErrorHandler.js';
+import { AppError } from './CustomErrorHandler.js';
 import env from '../configs/env.js';
 
 export function globalErrorHandler(
@@ -8,13 +8,25 @@ export function globalErrorHandler(
   res: Response,
   _next: NextFunction,
 ) {
-  err.statusCode = err.statusCode || 500;
-  err.message = err.message || 'Internal Server Error';
+  if (err instanceof AppError) {
+    console.error(
+      `[REGISTER FAILURE] Code: ${err.code} | Message: ${err.message}`,
+    );
 
-  res.status(err.statusCode).json({
-    success: false,
-    message: err.message,
-    timestamp: new Date().toISOString(),
-    details: env.NODE_ENV === 'development' ? err.stack : null,
-  });
+    return res.status(err.statusCode).json({
+      success: false,
+      code: err.code,
+      message: err.message,
+      timestamp: new Date().toISOString(),
+      details: env.NODE_ENV === 'development' ? err.stack : null,
+    });
+  } else {
+    console.error('[UNEXPECTED ERROR]', err);
+    return res.status(500).json({
+      success: false,
+      code: 'INTERNAL_SERVER_ERROR',
+      message: 'An unexpected error occurred',
+      timestamp: new Date().toISOString(),
+    });
+  }
 }

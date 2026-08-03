@@ -1,4 +1,4 @@
-import { AppError } from '../../handlers/CustomErrorHandler.js';
+import { BadRequestError } from '../../handlers/CustomErrorHandler.js';
 import type { UserRepository } from './user.repository.js';
 import type { IUser } from './user.schema.js';
 
@@ -11,7 +11,7 @@ export class UserService {
     const isUserExist = await this.userRepository.findByEmail(email);
 
     if (isUserExist) {
-      return new AppError(400, 'User already exists');
+      throw new BadRequestError();
     }
 
     return this.userRepository.create({
