@@ -3,7 +3,7 @@ export default function Footer() {
     <footer className=''>
       <div className='container mx-auto'>
         <div className='flex justify-between py-3 mt-7'>
-          <p>Footer</p>
+          <p>© 2026 Yogesh Sitaram Dhuri.</p>
           <div></div>
         </div>
       </div>
