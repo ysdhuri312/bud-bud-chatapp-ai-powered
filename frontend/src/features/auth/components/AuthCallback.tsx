@@ -13,11 +13,15 @@ export default function AuthCallback() {
 
       try {
         const token = await getToken();
-        const res = await axios.post('user/register', null, {
-          headers: {
-            Authorization: `Bearer ${token}`,
+        const res = await axios.post(
+          'user/register',
+          {},
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
           },
-        });
+        );
 
         console.log(res);
 

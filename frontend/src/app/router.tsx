@@ -5,22 +5,18 @@ import ChatLayout from '@/layouts/ChatLayout';
 import ChatPage from '@/features/chat/pages/ChatPage';
 import Signin from '@/features/auth/pages/Signin';
 import Signup from '@/features/auth/pages/Signup';
-import Home from '@/components/layout/Home';
-import { Show } from '@clerk/react';
 import AuthCallback from '@/features/auth/components/AuthCallback';
+import HomeRedirect from '@/components/layout/HomeRedirect';
 
 export const router = createBrowserRouter([
   {
     element: <RootLayout />,
     children: [
       {
-        element: (
-          <Show when='signed-out'>
-            <Home />
-          </Show>
-        ),
+        element: <HomeRedirect />,
         path: '/',
       },
+
       {
         element: <AuthLayout />,
         children: [
@@ -42,11 +38,7 @@ export const router = createBrowserRouter([
         element: <ChatLayout />,
         children: [
           {
-            element: (
-              <Show when='signed-in'>
-                <ChatPage />
-              </Show>
-            ),
+            element: <ChatPage />,
             path: '/chat',
           },
         ],
