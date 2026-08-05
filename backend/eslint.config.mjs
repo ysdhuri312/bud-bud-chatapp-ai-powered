@@ -19,7 +19,7 @@ export default defineConfig([
       },
     },
     rules: {
-      'no-console': 'off',
+      'no-console': 'warn',
       'no-unused-vars': 'off',
       'no-constant-condition': 'error',
       curly: 'error',

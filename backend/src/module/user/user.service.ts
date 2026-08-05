@@ -14,7 +14,6 @@ export class UserService {
       throw new ClerkError('Failed to find user', err);
     }
 
-    console.log(user);
     const isUserExist = await this.userRepository.findUserById(userId);
     if (isUserExist) {
       return;
