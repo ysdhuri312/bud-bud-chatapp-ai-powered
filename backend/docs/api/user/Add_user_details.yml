@@ -18,7 +18,8 @@ http:
         "status": "offline",
         "about": "None"
       }
-  auth: inherit
+  auth:
+    type: bearer
 
 settings:
   encodeUrl: true

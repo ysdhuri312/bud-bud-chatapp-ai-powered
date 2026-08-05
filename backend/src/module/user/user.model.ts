@@ -5,12 +5,17 @@ interface IUserDocument extends IUser, Document {}
 const userSchema = new mongoose.Schema<IUserDocument>(
   {
     clerkId: String,
+    userName: {
+      type: String,
+      require: true,
+      unique: [true, 'Username must be require'],
+    },
     firstName: String,
     lastName: String,
     email: {
       type: String,
       require: true,
-      unique: [true, 'Email must be require'],
+      unique: [true, 'Emailid must be require'],
     },
     avatar: String,
     status: {
