@@ -3,6 +3,8 @@ import cors from 'cors';
 import { globalErrorHandler } from './handlers/GlobalErrorHandler.js';
 import cookieParser from 'cookie-parser';
 import userRoutes from './routes/user.route.js';
+import friendRoutes from './routes/friend.route.js';
+import { clerkMiddleware } from '@clerk/express';
 
 export const app = express();
 
@@ -16,6 +18,7 @@ app.use(
   }),
 );
 app.use(cookieParser());
+app.use(clerkMiddleware());
 
 app.get('/api/v1', (_req: Request, res: Response) => {
   res.json({
@@ -25,6 +28,7 @@ app.get('/api/v1', (_req: Request, res: Response) => {
   });
 });
 
-app.use('/api/v1', userRoutes);
+app.use('/api/v1/user', userRoutes);
+app.use('/api/v1/friend', friendRoutes);
 
 app.use(globalErrorHandler);
