@@ -14,8 +14,10 @@ export class UserService {
       throw new ClerkError('Failed to find user', err);
     }
 
-    const isUserExist = await this.userRepository.findUserById(userId);
-    if (isUserExist) {
+    // TODO: If email already exist
+
+    const existingUser = await this.userRepository.findUserById(userId);
+    if (existingUser) {
       return;
     }
 
