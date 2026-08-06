@@ -12,8 +12,8 @@ export default function AuthCallback() {
       if (!isLoaded || !isSignedIn) return;
 
       try {
-        const token = await getToken();
-        const res = await axios.post(
+        const token = await getToken(); //TODO: Remove after devlopment
+        await axios.post(
           'user/register',
           {},
           {
@@ -22,8 +22,6 @@ export default function AuthCallback() {
             },
           },
         );
-
-        console.log(res);
 
         navigate('/chat');
       } catch (error) {
