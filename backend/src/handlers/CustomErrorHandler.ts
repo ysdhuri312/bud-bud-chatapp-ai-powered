@@ -23,3 +23,8 @@ export class ClerkError extends AppError {
     super(500, message, 'CLERK_ERROR', details);
   }
 }
+export class ZodError extends AppError {
+  constructor(message: string, details: unknown) {
+    super(400, message, 'ZOD_ERROR', details);
+  }
+}
