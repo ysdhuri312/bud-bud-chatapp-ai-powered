@@ -1,6 +1,6 @@
 <mxfile host="Electron" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/29.3.6 Chrome/140.0.7339.249 Electron/38.8.0 Safari/537.36" version="29.3.6">
   <diagram name="Page-1" id="hdqLqBWaeYTXmP9aH-yc">
-    <mxGraphModel dx="1013" dy="515" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+    <mxGraphModel dx="970" dy="514" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -383,7 +383,7 @@
           </mxGeometry>
         </mxCell>
         <mxCell id="HTTQj_p5kMmCEnHi3hVq-258" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="Yogesh&lt;div&gt;Durvesh&lt;/div&gt;&lt;div&gt;Bavesh&lt;/div&gt;&lt;div&gt;Ramesh&lt;/div&gt;&lt;div&gt;Omkar&lt;/div&gt;&lt;div&gt;Rohit&amp;nbsp;&lt;/div&gt;&lt;div&gt;Ram&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;" vertex="1">
-          <mxGeometry height="140" width="490" x="90" y="500" as="geometry" />
+          <mxGeometry height="140" width="60" x="90" y="500" as="geometry" />
         </mxCell>
         <mxCell id="HTTQj_p5kMmCEnHi3hVq-271" edge="1" parent="1" source="HTTQj_p5kMmCEnHi3hVq-2" style="edgeStyle=entityRelationEdgeStyle;fontSize=12;html=1;endArrow=ERmany;startArrow=ERmany;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="HTTQj_p5kMmCEnHi3hVq-230" value="">
           <mxGeometry height="100" relative="1" width="100" as="geometry">
