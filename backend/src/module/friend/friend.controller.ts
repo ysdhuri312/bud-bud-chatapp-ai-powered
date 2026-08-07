@@ -1,5 +1,5 @@
 import type { Request, Response } from 'express';
-import { usernameSchema, type IUSERNAME } from './friend.schema.js';
+import { usernameSchema, type IUsername } from './friend.schema.js';
 import type { FriendService } from './friend.service.js';
 import { ZodError } from '../../handlers/CustomErrorHandler.js';
 
@@ -19,7 +19,7 @@ export class FriendController {
     });
   };
 
-  addFriend = async (req: Request<IUSERNAME>, res: Response) => {
+  addFriend = async (req: Request<IUsername>, res: Response) => {
     const result = usernameSchema.safeParse(req.params);
 
     if (!result.success) {
