@@ -8,12 +8,25 @@ export class FriendService {
     public readonly userRepository: UserRepository,
   ) {}
 
-  addFriend = async (userId: string, username: string) => {
-    const friend = await this.userRepository.findUserByUsername(username);
-    if (!friend) {
+  allFriends = async (clerkUserId: string) => {
+    const currentUser = await this.userRepository.findUserById(clerkUserId);
+
+    if (!currentUser) {
       throw new BadRequestError('Friend not found');
     }
 
-    return this.friendRepository.add(userId, username);
+    return this.friendRepository.findAll(currentUser._id);
+  };
+
+  addFriend = async (clerkUserId: string, friendUsername: string) => {
+    const currentUser = await this.userRepository.findUserById(clerkUserId);
+    const friendUser =
+      await this.userRepository.findUserByUsername(friendUsername);
+
+    if (!currentUser || !friendUser) {
+      throw new BadRequestError('Friend not found');
+    }
+
+    return this.friendRepository.add(currentUser._id, friendUser._id);
   };
 }

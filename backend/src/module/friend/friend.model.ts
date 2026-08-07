@@ -1,10 +1,21 @@
-import mongoose, { Document, model } from 'mongoose';
-import type { IFriend } from './friend.schema.js';
-interface IFriendDocument extends IFriend, Document {}
+import mongoose, { Document, model, Types } from 'mongoose';
+
+interface IFriendDocument extends Document {
+  userId: Types.ObjectId;
+  friendId: Types.ObjectId;
+}
 
 const friendSchema = new mongoose.Schema<IFriendDocument>({
-  userId: String,
-  friendId: String,
+  userId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+    required: true,
+  },
+  friendId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+    required: true,
+  },
 });
 
 export const FriendModel =
