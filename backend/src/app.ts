@@ -1,6 +1,6 @@
 import express, { type Request, type Response } from 'express';
 import cors from 'cors';
-import { globalErrorHandler } from './handlers/GlobalErrorHandler.js';
+import { globalErrorHandler } from './handlers/error.handler.js';
 import cookieParser from 'cookie-parser';
 import userRoutes from './routes/user.route.js';
 import friendRoutes from './routes/friend.route.js';
