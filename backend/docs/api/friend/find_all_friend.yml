@@ -1,0 +1,17 @@
+info:
+  name: find_all_friend
+  type: http
+  seq: 4
+
+http:
+  method: GET
+  url: "{{baseUrl}}/friend"
+  auth:
+    type: bearer
+    token: eyJhbGciOiJSUzI1NiIsImNhdCI6ImNsX0I3ZDRQRDExMUFBQSIsImtpZCI6Imluc18zR3czSE5SVGZzUldydGR3QWdIN09qUlFJQVUiLCJvaWF0IjoxNzg2MDgzMDI5LCJ0eXAiOiJKV1QifQ.eyJhenAiOiJodHRwOi8vbG9jYWxob3N0OjUxNzMiLCJleHAiOjE3ODYwODMwODksImZ2YSI6WzAsLTFdLCJpYXQiOjE3ODYwODMwMjksImlzcyI6Imh0dHBzOi8vbmVhcmJ5LW1vcmF5LTQ3LmNsZXJrLmFjY291bnRzLmRldiIsIm5iZiI6MTc4NjA4MzAxOSwic2lkIjoic2Vzc18zSFprWWZUaHlMaFdTNG9reFJxY2F2czRiM00iLCJzdHMiOiJhY3RpdmUiLCJzdWIiOiJ1c2VyXzNIWmtZbEFnek5qNEp3Y1kydWpuOVBKRnJXeCIsInYiOjJ9.Z0Ev2obyDy4M0LkLKbnwHyt8sIODtAf7GjhbQq6mTc0B1jpZ7E5lzEgouUvM_CiY0RmK4LEEafSw1rp_xH996wIZf1e3o5DTdZSQ78cn8uoi38uQkB_thKjD-zox2OGqNgL3ZAjgYCn44P7ZpBTU6mmXH5Mr0Hb1faaHG7EA9UH-8CY4ADLaNTjlyX6_JIRp87fHIayW47UGYc7AgegMuW7D6SkTb5Cwj8ZgSEBaXdBI8ls4yCj5lSONv2SXdOJkAz8kmVVjiDBwQ-wQZVysvYQC12tg-JUytzVkwlKmwDUdENyKwCBtsz5VGZMZxNCuUeDltDyPodKvN0s9l3F5uQ
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

@@ -13,6 +13,8 @@ export default function AuthCallback() {
 
       try {
         const token = await getToken(); //TODO: Remove after devlopment
+        console.log(token);
+
         await axios.post(
           'user/register',
           {},
