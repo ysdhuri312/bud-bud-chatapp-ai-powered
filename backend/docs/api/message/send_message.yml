@@ -1,0 +1,27 @@
+info:
+  name: send_message
+  type: http
+  seq: 5
+
+http:
+  method: POST
+  url: "{{baseUrl}}/message/send/:username"
+  params:
+    - name: username
+      value: durvesh09
+      type: path
+  body:
+    type: json
+    data: |-
+      {
+        "message":"Hi"
+      }
+  auth:
+    type: bearer
+    token: eyJhbGciOiJSUzI1NiIsImNhdCI6ImNsX0I3ZDRQRDExMUFBQSIsImtpZCI6Imluc18zR3czSE5SVGZzUldydGR3QWdIN09qUlFJQVUiLCJvaWF0IjoxNzg2MzU0ODczLCJ0eXAiOiJKV1QifQ.eyJhenAiOiJodHRwOi8vbG9jYWxob3N0OjUxNzMiLCJleHAiOjE3ODYzNTQ5MzMsImZ2YSI6WzEwLC0xXSwiaWF0IjoxNzg2MzU0ODczLCJpc3MiOiJodHRwczovL25lYXJieS1tb3JheS00Ny5jbGVyay5hY2NvdW50cy5kZXYiLCJuYmYiOjE3ODYzNTQ4NjMsInNpZCI6InNlc3NfM0hpY0hLakl2VDlIb0ZmQkZ2Yk5DVTh2OGYwIiwic3RzIjoiYWN0aXZlIiwic3ViIjoidXNlcl8zSFprTTliZ0RnTE05Rlo1bExwNWV2SXc2Q3IiLCJ2IjoyfQ.J5yHvFyvqCeS_L75jZayX63cXf9deiJYDYZkeO1mmfocdFaaB_xwfrHk3dYIEzNiCU51e5lmtYs4Jz60IwYl5kwBd_11BqhCpokNi7CcsmmSrbl4obEtQd8v_vBPrRKmR0iMc6dmdoFIW2Up1A77BPNjuqB1Cy_Pc3eA9plODMgqJzF89GE_6BBOTmdTY3qO8QLZ0Rf0RkJ7qOzRwv6v0Cl-glnjSQrUrnIbjBkJw0mfEW-D7hPN1PbzzWCV9q1cZIzYFY35WiALmMq-qbshKzGDXV9bBxByMP_ZZDclP27Swn9uKpyQHWFH0IHyIqFpMk-ncKc1NYH5AnYIwZY7BQ
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
