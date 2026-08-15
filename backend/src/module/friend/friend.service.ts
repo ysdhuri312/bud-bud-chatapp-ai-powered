@@ -4,7 +4,7 @@ import type { UserRepository } from '../user/user.repository.js';
 
 export class FriendService {
   constructor(
-    private readonly friendRepository: FriendRepostory,
+    public readonly friendRepository: FriendRepostory,
     public readonly userRepository: UserRepository,
   ) {}
 
@@ -24,7 +24,7 @@ export class FriendService {
       await this.userRepository.findUserByUsername(friendUsername);
 
     if (!currentUser || !friendUser) {
-      throw new BadRequestError('Friend not found');
+      throw new BadRequestError('users not found');
     }
 
     return this.friendRepository.add(currentUser._id, friendUser._id);

@@ -18,7 +18,9 @@ export class FriendRepostory {
 
   findAll = (userId: Types.ObjectId) => {
     try {
-      return FriendModel.find({ userId }).populate('friendId');
+      return FriendModel.find({ userId }, { friendId: 1, _id: 0 }).populate(
+        'friendId',
+      );
     } catch (err) {
       throw new AppError(
         500,

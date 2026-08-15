@@ -15,7 +15,7 @@ export class FriendController {
       success: true,
       timestamp: new Date().toISOString(),
       message: 'All friends fetch sucessefully',
-      data: allFriends,
+      friendships: allFriends,
     });
   };
 
