@@ -1,11 +1,11 @@
 import { AppSidebar } from '../components/app-sidebar';
 import { SidebarProvider } from '@/components/ui/sidebar';
 import ChatsSection from '../components/ChatsSection';
-import { useUser } from '@clerk/react';
+import { getToken } from '@clerk/react';
 
 export default function Page() {
-  const { user } = useUser();
-  console.log(user);
+  const token = getToken(); //TODO: Remove after devlopment
+  token.then((data) => console.log(data)).catch((err) => console.log(err));
 
   return (
     <SidebarProvider
