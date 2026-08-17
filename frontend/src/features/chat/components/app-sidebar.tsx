@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { useState, useEffect } from 'react';
 import { Command, MessageCirclePlus, EllipsisVertical } from 'lucide-react';
 
 import { NavUser } from './nav-user';
@@ -19,13 +19,62 @@ import {
 import { Button } from '@/components/ui/button';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { data } from '@/data';
+import axios from '@/shared/services/apiClient';
+import { AxiosError } from 'axios';
+import formatedTime from '@/utils/formatedTimeDate';
+
+type User = {
+  _id: string;
+  clerkId: string;
+  userName: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  avatar: string;
+  status: boolean;
+  createdAt: Date;
+  updatedAt: Date;
+  __v: number;
+};
+
+type Friend = {
+  friendId: User;
+};
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   // Note: I'm using state to show active item.
   // IRL you should use the url/router.
-  const [activeItem, setActiveItem] = React.useState(data.navMain[0]);
-  const [chats, setChats] = React.useState(data.chats);
+
+  const [activeItem, setActiveItem] = useState(data.navMain[0]);
   const { setOpen } = useSidebar();
+  const [friendships, setFriendships] = useState<Friend[]>([]);
+  const [error, setError] = useState('');
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchFriends = async () => {
+      try {
+        const response = await axios.get('friend', {
+          timeout: 5000,
+        });
+
+        setFriendships(response.data.friendships);
+      } catch (error) {
+        if (error instanceof AxiosError) {
+          setError(error.message);
+        }
+        setError('Something went wrong');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchFriends();
+  }, []);
+
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error: {error}</p>;
+  const friends = friendships.map((friend: Friend) => friend.friendId);
 
   return (
     <Sidebar
@@ -74,9 +123,11 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                       }}
                       onClick={() => {
                         setActiveItem(item);
-                        const mail = data.chats.sort(() => Math.random() - 0.5);
-                        setChats(
-                          mail.slice(
+                        const chat = friendships.sort(
+                          () => Math.random() - 0.5,
+                        );
+                        setFriendships(
+                          chat.slice(
                             0,
                             Math.max(5, Math.floor(Math.random() * 10) + 1),
                           ),
@@ -122,30 +173,34 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         <SidebarContent>
           <SidebarGroup className='px-0'>
             <SidebarGroupContent>
-              {chats.map((chat) => (
-                <div
-                  key={chat.email}
-                  className='flex items-center hover:bg-sidebar-accent hover:text-sidebar-accent-foreground'
-                >
-                  <Avatar className='h-10 w-10 rounded-lg ml-2'>
-                    <AvatarImage src={chat.avatar} alt={chat.name} />
-                    <AvatarFallback className='rounded-lg'>YD</AvatarFallback>
-                  </Avatar>{' '}
-                  <a
-                    href='#'
-                    key={chat.email}
-                    className='flex flex-col items-start gap-1 border-b p-3 text-sm leading-tight whitespace-nowrap last:border-b-0'
+              {friends.map((friend) => {
+                return (
+                  <div
+                    key={friend._id}
+                    className='flex items-center hover:bg-sidebar-accent hover:text-sidebar-accent-foreground'
                   >
-                    <div className='flex w-full items-center gap-2'>
-                      <span>{chat.name}</span>{' '}
-                      <span className='ml-auto text-xs'>{chat.date}</span>
-                    </div>
-                    <span className='line-clamp-2 w-58 text-xs whitespace-break-spaces'>
-                      {chat.teaser}
-                    </span>
-                  </a>
-                </div>
-              ))}
+                    <Avatar className='h-10 w-10 rounded-lg ml-2'>
+                      <AvatarImage src={friend.avatar} alt={friend.firstName} />
+                      <AvatarFallback className='rounded-lg'>YD</AvatarFallback>
+                    </Avatar>{' '}
+                    <a
+                      href='#'
+                      key={friend.email}
+                      className='flex flex-col items-start gap-1 border-b p-3 text-sm leading-tight whitespace-nowrap last:border-b-0'
+                    >
+                      <div className='flex w-full items-center gap-2'>
+                        <span>{`${friend.firstName} ${friend.lastName}`}</span>{' '}
+                        <span className='ml-auto text-xs'>
+                          {formatedTime(friend.updatedAt)}
+                        </span>
+                      </div>
+                      <span className='line-clamp-2 w-58 text-xs whitespace-break-spaces'>
+                        {'Hi Yogesh, Good Morning...'}
+                      </span>
+                    </a>
+                  </div>
+                );
+              })}
             </SidebarGroupContent>
           </SidebarGroup>
         </SidebarContent>
