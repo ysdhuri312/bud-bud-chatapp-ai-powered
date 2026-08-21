@@ -10,20 +10,68 @@ export class MessageService {
 
   sendMessage = async (
     clerkUserId: string,
-    username: string,
+    receiverUsername: string,
     message: string,
   ) => {
-    const receiverId = await this.userRepository.findUserByUsername(username);
+    const receiverUser =
+      await this.userRepository.findUserByUsername(receiverUsername);
     const currentUser = await this.userRepository.findUserById(clerkUserId);
 
-    if (!currentUser || !receiverId) {
+    const senderId = currentUser?._id.toString();
+    const receiverId = receiverUser?._id.toString();
+
+    if (!senderId || !receiverId) {
       throw new BadRequestError('users not found');
     }
 
+    let conversation;
+    conversation = await this.messageRepository.findConversation(
+      senderId,
+      receiverId,
+    );
+
+    if (!conversation) {
+      conversation = await this.messageRepository.createConversation(
+        senderId,
+        receiverId,
+      );
+    } else {
+      await this.messageRepository.updateConversation(
+        conversation._id.toString(),
+      );
+    }
+
     return this.messageRepository.addMessages(
-      String(currentUser._id),
-      String(receiverId._id),
+      senderId,
+      receiverId,
+      conversation?._id.toString(),
       message,
     );
+  };
+
+  getMessages = async (consversationId: string) => {
+    return this.messageRepository.getAllMessages(consversationId);
+  };
+
+  // Conversation Module
+
+  findConversation = async (senderId: string, receiverId: string) => {
+    return await this.messageRepository.findConversation(senderId, receiverId);
+  };
+
+  createConversation = async (
+    senderId: string,
+    receiverId: string,
+    messageId: string,
+  ) => {
+    await this.messageRepository.createConversation(
+      senderId,
+      receiverId,
+      messageId,
+    );
+  };
+
+  updateConversation = async (conversationId: string, messageId: string) => {
+    await this.messageRepository.updateConversation(conversationId, messageId);
   };
 }

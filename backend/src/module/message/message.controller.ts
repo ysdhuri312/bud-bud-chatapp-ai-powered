@@ -15,18 +15,42 @@ export class MessageController {
       throw new ZodError('Internal Server Error', messageResult.error);
     }
 
-    const { username } = usernameResult.data;
+    const { userId: clerkUserId } = req.auth;
+    const { username: receiverUsername } = usernameResult.data;
     const { message } = messageResult.data;
-    const { userId } = req.auth;
 
-    console.log(username, message, userId);
-    await this.messageService.sendMessage(userId, username, message);
+    console.log(receiverUsername, message, clerkUserId); //TODO: log statement
+    const response = await this.messageService.sendMessage(
+      clerkUserId,
+      receiverUsername,
+      message,
+    );
+
+    await this.messageService.updateConversation(
+      response.conversationId,
+      response._id.toString(),
+    );
 
     return res.json({
       success: true,
       timestamp: new Date().toISOString(),
       message: 'Message sent successfully',
-      data: message,
+      data: response,
+    });
+  };
+
+  getMessages = async (req: Request, res: Response) => {
+    const { conversationId } = req.params;
+
+    const messages = await this.messageService.getMessages(
+      conversationId as string,
+    );
+
+    return res.json({
+      success: true,
+      timestamp: new Date().toISOString(),
+      message: 'Message sent successfully',
+      conversations: messages,
     });
   };
 }

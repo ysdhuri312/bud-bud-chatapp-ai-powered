@@ -1,6 +1,7 @@
 import z from 'zod';
 
 export const messageSchema = z.object({
+  conversationId: z.string(),
   senderId: z.string(),
   receiverId: z.string(),
   text: z.string(),
