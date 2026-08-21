@@ -1,0 +1,22 @@
+info:
+  name: get_all_conversations
+  type: http
+  seq: 5
+
+http:
+  method: GET
+  url: "{{baseUrl}}/message/conversations/:conversationId"
+  params:
+    - name: conversationId
+      value: 6a87381f63da55880d4ac284
+      type: path
+  auth:
+    type: bearer
+    token: eyJhbGciOiJSUzI1NiIsImNhdCI6ImNsX0I3ZDRQRDExMUFBQSIsImtpZCI6Imluc18zR3czSE5SVGZzUldydGR3QWdIN09qUlFJQVUiLCJvaWF0IjoxNzg3MjkwNjkwLCJ0eXAiOiJKV1QifQ.eyJhenAiOiJodHRwOi8vbG9jYWxob3N0OjUxNzMiLCJleHAiOjE3ODcyOTA3NTAsImZ2YSI6Wzg0NDUsLTFdLCJpYXQiOjE3ODcyOTA2OTAsImlzcyI6Imh0dHBzOi8vbmVhcmJ5LW1vcmF5LTQ3LmNsZXJrLmFjY291bnRzLmRldiIsIm5iZiI6MTc4NzI5MDY4MCwic2lkIjoic2Vzc18zSHdmRHpWeGJXMTkzSE5ic0NLZThjaDdPV3YiLCJzdHMiOiJhY3RpdmUiLCJzdWIiOiJ1c2VyXzNIWmtNOWJnRGdMTTlGWjVsTHA1ZXZJdzZDciIsInYiOjJ9.PuZX2GeSHS39cjyBvLxKCA257dwc-JRM4f77WrzYozurv_xWosP8UZKMOpwEIgEU4rGC9erw8tFF1mLXBQ3Z2EqflFF5WZyDc_J5scjo8dqjxO_SVGr2ppJ1fWPBfjSHrKA68z7a1RRxJ32OOS4egouLYrwY1H91kwAPtJl_UCag9F_OaJHCUeIufgQYlsHGmmY72vH_8mIK0dvPG4_FtpZClMf_ZKAHBeOjFb9sfiI6PHDwtQRFMIJLwGXq2goL5jxtFywch28j7acuQZmI_IP2nXchhqD54ryByq_hIX3euMETRmww0NirkRvaoczuxz3VPKe5vHlfph0OBUf2tQ
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
