@@ -3,6 +3,7 @@ import { type Request } from 'express';
 import { IUser, userSchema } from '../interface/user.js';
 import { AppError } from '../handlers/AppError.js';
 import bcrypt from 'bcryptjs';
+import { generaterAccessToken } from '../services/jwt.service.js';
 
 export const register = asyncErrorHandler(
   async (req: Request<unknown, unknown, IUser>, res, next) => {
@@ -16,10 +17,18 @@ export const register = asyncErrorHandler(
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(password, salt);
 
-    res.status(201).json({
-      success: true,
-      message: 'User create successfully',
-      data: { name, email, password: hashedPassword },
-    });
+    const accessToken = generaterAccessToken({ userId: 'djkhfdsajh', email });
+
+    res
+      .status(201)
+      .cookie('access_token', `Bearer ${accessToken}`, {
+        maxAge: Number(process.env.ACCESS_TOKEN_EXPIRY),
+      })
+      .json({
+        success: true,
+        message: 'User create successfully',
+        data: { name, email, password: hashedPassword },
+        accessToken, // TODO: Remove
+      });
   },
 );
