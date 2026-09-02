@@ -3,7 +3,6 @@ import { type Request } from 'express';
 import { IUser, userSchema } from '../interface/user.js';
 import { AppError } from '../handlers/AppError.js';
 import bcrypt from 'bcryptjs';
-import { string } from 'zod';
 
 export const register = asyncErrorHandler(
   async (req: Request<unknown, unknown, IUser>, res, next) => {
