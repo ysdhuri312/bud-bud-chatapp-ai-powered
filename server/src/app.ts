@@ -1,13 +1,21 @@
 import http from 'node:http';
 import express from 'express';
-import { errorMiddleware } from './handlers/error.handler.js';
 import dotenv from 'dotenv';
+import cors from 'cors';
+import { errorMiddleware } from './handlers/error.handler.js';
 import authRoutes from './routes/auth.routes.js';
 
 export const app = express();
 export const server = http.createServer(app);
 
 dotenv.config();
+app.use(
+  cors({
+    origin: process.env.FRONTEND_URL,
+    credentials: true,
+    optionsSuccessStatus: 200,
+  }),
+);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
