@@ -1,6 +1,6 @@
 import type React from 'react';
 import { useState } from 'react';
-import { Link } from 'react-router';
+import { Link, useNavigate } from 'react-router';
 import { apiClient } from '../services/api.service';
 import axios from 'axios';
 
@@ -8,13 +8,15 @@ const Signin = () => {
   const [form, setForm] = useState({ email: '', password: '' });
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   async function handleSubmit(e: React.SubmitEvent<HTMLFormElement>) {
     e.preventDefault();
 
     try {
-      const responce = await apiClient.post('auth/login', form);
-      console.log(responce);
+      await apiClient.post('auth/login', form);
+
+      navigate('/chats');
 
       setForm({ email: '', password: '' });
       setError('');
@@ -60,7 +62,8 @@ const Signin = () => {
             {loading ? 'Loading...' : 'Submit'}
           </button>
 
-          {error ? <p className='text-red-500'>{error}</p> : ''}
+          {error && <p className='text-red-500'>{error}</p>}
+
           <div>
             <div className='cursor-pointer'>Forgotten password?</div>
             <div className='mt-0'>

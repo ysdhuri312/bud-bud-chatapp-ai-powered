@@ -5,6 +5,7 @@ import { BrowserRouter, Route, Routes } from 'react-router';
 import Signup from './components/Signup.tsx';
 import Home from './pages/Home.tsx';
 import Signin from './components/Signin.tsx';
+import ChatLayout from './pages/ChatLayout.tsx';
 
 createRoot(document.getElementById('root')!).render(
   <BrowserRouter>
@@ -13,6 +14,7 @@ createRoot(document.getElementById('root')!).render(
         <Route index path='/' element={<Home />} />
         <Route path='/signup' element={<Signup />} />
         <Route path='/signin' element={<Signin />} />
+        <Route path='/chats' element={<ChatLayout />} />
       </Route>
     </Routes>
   </BrowserRouter>,
