@@ -104,3 +104,18 @@ export const login = asyncErrorHandler(
       });
   },
 );
+
+export const logout = asyncErrorHandler(async (_req, res, _next) => {
+  res
+    .status(200)
+    .cookie('access_token', '', {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'development' ? false : true,
+      sameSite: process.env.NODE_ENV === 'development' ? 'lax' : 'strict',
+      maxAge: 0,
+    })
+    .json({
+      success: true,
+      message: 'User logout succesfully',
+    });
+});
