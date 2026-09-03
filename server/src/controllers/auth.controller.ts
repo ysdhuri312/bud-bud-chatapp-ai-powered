@@ -52,7 +52,7 @@ export const register = asyncErrorHandler(
       .json({
         success: true,
         message: 'User registered successfully',
-        data: { name, email },
+        user: { name, email },
         accessToken, // TODO: Remove
       });
   },
@@ -78,7 +78,10 @@ export const login = asyncErrorHandler(
       next(new AppError(401, 'User not register'));
     }
 
-    const userVerification = bcrypt.compare(password, String(user!.password));
+    const userVerification = await bcrypt.compare(
+      password,
+      String(user!.password),
+    );
 
     if (!userVerification) {
       next(new AppError(401, 'Email and passward mismatch'));
@@ -100,7 +103,7 @@ export const login = asyncErrorHandler(
       .json({
         success: true,
         message: 'User login successfully',
-        data: user?.email,
+        email: user?.email,
       });
   },
 );
