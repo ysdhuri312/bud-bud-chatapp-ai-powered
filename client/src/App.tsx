@@ -4,11 +4,16 @@ import Navbar from './components/Navbar';
 
 function App() {
   return (
-    <>
-      <Navbar />
-      ChatAPP
-      <Footer />
-    </>
+    <div className='h-screen flex flex-col font-mono'>
+      <header className='border-b border-b-gray-300'>
+        <Navbar />
+      </header>
+      <main className='flex-1 overflow-y-auto'>Chat-app</main>
+
+      <footer className='border-t border-t-gray-300'>
+        <Footer />
+      </footer>
+    </div>
   );
 }
 
