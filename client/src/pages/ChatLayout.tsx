@@ -1,9 +1,28 @@
+import { useEffect, useState } from 'react';
 import ChatHeader from '../components/chat-section/ChatHeader';
 import MessageInput from '../components/chat-section/MessageInput';
 import MessageList from '../components/chat-section/MessageList';
 import Sidebar from '../components/chat-section/Sidebar';
+import { io } from 'socket.io-client';
 
 const ChatLayout = () => {
+  const [messages, setMessages] = useState<string[]>([]);
+  const socket = io(import.meta.env.VITE_API_URL);
+
+  useEffect(() => {
+    socket.on('received-message', (message: string) => {
+      setMessages((prev) => [...prev, message]);
+    });
+
+    return () => {
+      socket.disconnect();
+    };
+  }, []);
+
+  const sendMessage = (text: string) => {
+    socket.emit('send-message', text);
+  };
+
   return (
     <div className='h-full flex overflow-hidden'>
       {/* Sidebar */}
@@ -18,11 +37,11 @@ const ChatLayout = () => {
         </header>
 
         <div className='flex-1 overflow-y-auto'>
-          <MessageList />
+          <MessageList messages={messages} />
         </div>
 
         <footer className='border-t'>
-          <MessageInput />
+          <MessageInput onSend={sendMessage} />
         </footer>
       </section>
     </div>
